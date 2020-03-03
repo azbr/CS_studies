@@ -1,3 +1,5 @@
+""" Simple Linked List. """
+
 class Node:
     """ Element of a linked list.
     Contains a key and points to the next element. """
@@ -69,6 +71,8 @@ class SimpleLinkedList:
         previous_last.next_element = None
         self.end = previous_last
 
+
+""" Doubly Linked List. """
 
 class DNode(Node):
     """ Element of a doubly linked list.
