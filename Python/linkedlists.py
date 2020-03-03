@@ -78,7 +78,7 @@ class DNode(Node):
     """ Element of a doubly linked list.
         Contains a key and points to the next and to the previous element. """
 
-    def __init__(self, key, previous_element=None, next_element=None, ):
+    def __init__(self, key, previous_element=None, next_element=None):
         super().__init__(key, next_element)
         self.previous_element = previous_element
 
