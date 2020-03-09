@@ -26,6 +26,22 @@ void push(node ** head, int val) {
 }
 
 
+int pop(node ** head) {
+	int val;
+	node * next_node = NULL;
+
+	if (*head == NULL) {
+		return -1;
+	}
+
+	next_node = (*head)->next;
+	val = (*head)->val;
+	free(*head);
+	*head = next_node;
+
+	return val;
+}
+
 void add_last(node * head, int val) {
 	node * current = head;
 	while (current->next != NULL) {
@@ -45,5 +61,10 @@ int main() {
 	push(&test_list, 3);
 
 	print_list(test_list);
+	
+	printf("Pop value %d\n", pop(&test_list));
+	printf("New list\n");
+	print_list(test_list);
+
 	return 0;
 }
