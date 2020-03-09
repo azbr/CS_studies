@@ -76,20 +76,46 @@ int remove_last(node ** head) {
 	return val;
 }
 
+int remove_value(node ** head, int val) {
+    int ret_val;
+    node * current = *head;
+    node * temp_node = NULL;
+
+    while (current->next != NULL && current->next->val != val) {
+	
+	if (current->next == NULL) {
+		return -1;
+	}
+        current = current->next;
+    }
+
+    temp_node = current->next;
+    ret_val = temp_node->val;
+    current->next = temp_node->next;
+    free(temp_node);
+    return ret_val;
+
+}
+
 int main() {
 	node * test_list = (node *) malloc(sizeof(node));
 	test_list->val = 1;
 	push(&test_list, 2);
 	push(&test_list, 3);
+	push(&test_list, 4);
 
+	printf("Testing linked list\n");
 	print_list(test_list);
 	
-	printf("Pop value %d\n", pop(&test_list));
-	printf("New list\n");
+	printf("\nPop value %d\n", pop(&test_list));
 	print_list(test_list);
 
-	printf("Remove Last\n");
+	printf("\nRemove Last\n");
 	remove_last(&test_list);
+	print_list(test_list);
+
+	printf("\nRemove value 2\n");
+	remove_value(&test_list, 2);
 	print_list(test_list);
 
 	return 0;
