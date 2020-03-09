@@ -53,6 +53,28 @@ void add_last(node * head, int val) {
 	current->next->next = NULL;
 }
 
+int remove_last(node ** head) {
+	int val;
+
+	if (*head == NULL) {
+		return -1;
+
+	} else if ((*head)->next == NULL) {
+		val = (*head)->val;
+		free(head);
+		return val;
+	}
+
+	node * current = *head;
+	while (current->next->next != NULL) {
+		current = current->next;
+	}
+
+	val = current->next->val;
+	free(current->next);
+	current->next = NULL;
+	return val;
+}
 
 int main() {
 	node * test_list = (node *) malloc(sizeof(node));
@@ -64,6 +86,10 @@ int main() {
 	
 	printf("Pop value %d\n", pop(&test_list));
 	printf("New list\n");
+	print_list(test_list);
+
+	printf("Remove Last\n");
+	remove_last(&test_list);
 	print_list(test_list);
 
 	return 0;
