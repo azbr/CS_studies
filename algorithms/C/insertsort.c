@@ -3,41 +3,43 @@
 #include <time.h>
 
 
-char *randomList(int n) {
-
-	// Create a random array //
+int *randomList(int *arr, int size) {
+	
 	
 	int i;
-	char *list = malloc(n);
 	
 	srand(time(0));
 
-	if (!list) {
-		return NULL;
+	for (i = 0; i < size; i++) {
+		arr[i] = (rand() % 1000);
 	}
-	for (i = 0; i < n; i++) {
-		list[i] = (rand() % 100);
-	}
-	return list;
+	return arr;
+
 }
 
 int main() {
 
-	int n = 10;
+	int n = 100;
 	int i;
 	int j;
 	int k;
 	int key;
-	char *numbers = randomList(n);
+	int arr[n];
+
+	int *numbers = randomList(arr, n);
+
+	clock_t t;
 
 	printf("\nInsertion-Sort algorithm implementation\n");
-	printf("Array of %d numbers generated randomly between 0 and 100\n\n", n);
+	printf("Array of %d numbers generated randomly.", n);
 
 	printf("Original array\n");
 	for (i = 0; i < n; i++) {
 		printf("%d ", numbers[i]);
 	}
 	
+	t = clock();
+
 	for (j = 1; j < n; j++) {
 		key = numbers[j];
 		k = j - 1;
@@ -48,11 +50,16 @@ int main() {
 		numbers[k + 1] = key;
 	}
 	
+	// time elapsed in miliseconds
+	t = clock() - t;
+	double time_elapsed = (double)t/(CLOCKS_PER_SEC/1000);
+
 	printf("\n\nSorted numbers\n");
 	for (i = 0; i < n; i++) {
 		printf("%d ", numbers[i]);
 	}
-	printf("\n");
+	printf("\n\n");
+	printf("Time elapsed: %.9f miliseconds.\n", time_elapsed);
 	return 0;
 }
 
